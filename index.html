@@ -4,9 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>KeyVault</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -22,13 +20,9 @@
 
     <h1>KeyVault</h1>
 
-    <p class="subtitle">
-      Secure API key manager
-    </p>
+    <p class="subtitle">Secure API key manager</p>
 
-    <div class="locked-badge">
-      🔒 VAULT LOCKED
-    </div>
+    <div class="locked-badge">🔒 VAULT LOCKED</div>
 
     <label>Enter password</label>
 
@@ -59,9 +53,7 @@
 
     <div class="brand">
 
-      <div class="brand-icon">
-        🔐
-      </div>
+      <div class="brand-icon">🔐</div>
 
       <div>
         <h2>KeyVault</h2>
@@ -70,28 +62,20 @@
 
     </div>
 
-    <button
-      id="lockButton"
-      class="icon-button">
+    <button id="lockButton" class="icon-button">
       🔒
     </button>
 
   </header>
 
 
-  <!-- TITLE -->
-
   <section class="welcome">
 
-    <span class="eyebrow">
-      SECURE VAULT
-    </span>
+    <span class="eyebrow">SECURE VAULT</span>
 
     <h1>Your API keys</h1>
 
-    <p>
-      Manage all your AI credentials in one place.
-    </p>
+    <p>Manage all your AI credentials in one place.</p>
 
   </section>
 
@@ -108,9 +92,7 @@
       placeholder="Search keys or providers..."
     >
 
-    <button id="addButton">
-      ＋
-    </button>
+    <button id="addButton">＋</button>
 
   </div>
 
@@ -142,25 +124,69 @@
   </div>
 
 
-  <!-- API CARDS -->
+  <!-- ADD API -->
+
+  <section id="addPanel" class="add-panel">
+
+    <div class="panel-header">
+
+      <div>
+        <span class="eyebrow">NEW CREDENTIAL</span>
+        <h2>Add API Key</h2>
+      </div>
+
+      <button id="closeAddButton">✕</button>
+
+    </div>
+
+
+    <label>Provider</label>
+
+    <input
+      id="providerInput"
+      type="text"
+      placeholder="e.g. OpenAI"
+    >
+
+
+    <label>API name</label>
+
+    <input
+      id="nameInput"
+      type="text"
+      placeholder="e.g. My OpenAI"
+    >
+
+
+    <label>API key</label>
+
+    <input
+      id="apiInput"
+      type="password"
+      placeholder="Enter test API key"
+    >
+
+
+    <button id="saveButton" class="primary-button">
+      💾 Save API Key
+    </button>
+
+  </section>
+
+
+  <!-- API LIST -->
 
   <section id="keyList">
 
     <div class="empty-state">
 
-      <div class="key-symbol">
-        🔑
-      </div>
+      <div class="key-symbol">🔑</div>
 
       <h2>No API keys yet</h2>
 
-      <p>
-        Add your first API key using the ＋ button.
-      </p>
+      <p>Add your first API key using the ＋ button.</p>
 
-      <button
-        id="emptyAddButton"
-        class="primary-button">
+      <button id="emptyAddButton" class="primary-button">
         ＋ Add API Key
       </button>
 
@@ -169,7 +195,7 @@
   </section>
 
 
-  <!-- BOTTOM NAV -->
+  <!-- NAVIGATION -->
 
   <nav>
 
@@ -196,5 +222,4 @@
 <script src="script.js"></script>
 
 </body>
-
 </html>
