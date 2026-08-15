@@ -12,10 +12,7 @@
 
 <body>
 
-
-<!-- =========================
-     LOCK SCREEN
-========================= -->
+<!-- LOCK SCREEN -->
 
 <div id="lockScreen">
 
@@ -36,8 +33,7 @@
       type="password"
       inputmode="numeric"
       maxlength="4"
-      placeholder="Enter password"
-    >
+      placeholder="Enter password">
 
     <div id="error"></div>
 
@@ -50,13 +46,9 @@
 </div>
 
 
-
-<!-- =========================
-     MAIN APP
-========================= -->
+<!-- MAIN APP -->
 
 <div id="app">
-
 
   <!-- HEADER -->
 
@@ -64,258 +56,286 @@
 
     <div class="logoArea">
 
-      <div class="logo">
-        🔑
-      </div>
+      <div class="logo">🔑</div>
 
       <div>
-
         <h2>KeyVault</h2>
-
-        <small>
-          API KEY MANAGER
-        </small>
-
+        <small>API KEY MANAGER</small>
       </div>
 
     </div>
 
-
-    <button
-      id="lockButton"
-      class="lockButton">
-
+    <button id="lockButton" class="lockButton">
       🔒
-
     </button>
 
   </header>
 
 
+  <!-- KEYS PAGE -->
 
-  <!-- TITLE -->
+  <main id="keysPage">
 
-  <section class="titleArea">
+    <section class="titleArea">
 
-    <small>
-      SECURE VAULT
-    </small>
+      <small>SECURE VAULT</small>
 
-    <h1>
-      Your API keys
-    </h1>
+      <h1>Your API keys</h1>
 
-    <p>
-      Manage all your AI credentials in one place.
-    </p>
+      <p>
+        Manage all your AI credentials in one place.
+      </p>
 
-  </section>
+    </section>
 
 
+    <!-- SEARCH -->
 
-  <!-- SEARCH -->
+    <div class="searchBox">
 
-  <div class="searchBox">
+      <span>⌕</span>
 
-    <span>⌕</span>
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Search keys, providers, notes">
 
-    <input
-      id="searchInput"
-      type="text"
-      placeholder="Search keys, providers, notes"
-    >
-
-    <button id="addButton">
-      ＋
-    </button>
-
-  </div>
-
-
-
-  <!-- FILTERS -->
-
-  <div class="filters">
-
-    <button class="filter active">
-      All <b id="allCount">0</b>
-    </button>
-
-    <button class="filter">
-      Valid 0
-    </button>
-
-    <button class="filter">
-      Needs Check 0
-    </button>
-
-    <button class="filter">
-      Low Balance 0
-    </button>
-
-    <button class="filter">
-      Invalid 0
-    </button>
-
-  </div>
-
-
-
-  <!-- =========================
-       ADD API PANEL
-  ========================= -->
-
-  <div id="addPanel">
-
-    <div class="panelTop">
-
-      <div>
-
-        <small>
-          NEW CREDENTIAL
-        </small>
-
-        <h2>
-          Add API Key
-        </h2>
-
-      </div>
-
-
-      <button id="closeAdd">
-        ✕
+      <button id="addButton">
+        ＋
       </button>
 
     </div>
 
 
-    <label>
-      Provider
-    </label>
+    <!-- FILTERS -->
 
-    <input
-      id="providerInput"
-      type="text"
-      placeholder="e.g. OpenAI"
-    >
+    <div class="filters">
 
+      <button class="filter active">
+        All <b id="allCount">0</b>
+      </button>
 
-    <label>
-      API name
-    </label>
+      <button class="filter">
+        Valid
+      </button>
 
-    <input
-      id="nameInput"
-      type="text"
-      placeholder="e.g. OpenAI Production"
-    >
+      <button class="filter">
+        Needs Check
+      </button>
 
+      <button class="filter">
+        Low Balance
+      </button>
 
-    <label>
-      API key
-    </label>
-
-    <input
-      id="apiInput"
-      type="password"
-      placeholder="Enter API key"
-    >
-
-
-    <label>
-      USD Balance
-    </label>
-
-    <input
-      id="balanceInput"
-      type="number"
-      step="0.01"
-      placeholder="e.g. 18.42"
-    >
-
-
-    <button
-      type="button"
-      class="saveButton"
-      onclick="saveKey()">
-
-      💾 Save API Key
-
-    </button>
-
-  </div>
-
-
-
-  <!-- =========================
-       API KEY LIST
-  ========================= -->
-
-  <div id="keyList">
-
-    <div class="empty">
-
-      <div class="bigKey">
-        🔑
-      </div>
-
-      <h2>
-        No API keys yet
-      </h2>
-
-      <p>
-        Add your first API key using the ＋ button.
-      </p>
+      <button class="filter">
+        Invalid
+      </button>
 
     </div>
 
-  </div>
+
+    <!-- ADD PANEL -->
+
+    <div id="addPanel">
+
+      <div class="panelTop">
+
+        <div>
+
+          <small>NEW CREDENTIAL</small>
+
+          <h2>Add API Key</h2>
+
+        </div>
+
+        <button id="closeAdd">
+          ✕
+        </button>
+
+      </div>
 
 
+      <label>Provider</label>
 
-  <!-- =========================
-       BOTTOM NAV
-  ========================= -->
+      <input
+        id="providerInput"
+        type="text"
+        placeholder="e.g. OpenAI">
+
+
+      <label>API name</label>
+
+      <input
+        id="nameInput"
+        type="text"
+        placeholder="e.g. OpenAI Production">
+
+
+      <label>API key</label>
+
+      <input
+        id="apiInput"
+        type="password"
+        placeholder="Enter API key">
+
+
+      <label>USD Balance</label>
+
+      <input
+        id="balanceInput"
+        type="number"
+        step="0.01"
+        placeholder="e.g. 18.42">
+
+
+      <button
+        type="button"
+        class="saveButton"
+        onclick="saveKey()">
+
+        💾 Save API Key
+
+      </button>
+
+    </div>
+
+
+    <!-- API LIST -->
+
+    <div id="keyList">
+
+      <div class="empty">
+
+        <div class="bigKey">🔑</div>
+
+        <h2>No API keys yet</h2>
+
+        <p>
+          Add your first API key using the ＋ button.
+        </p>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- USAGE PAGE -->
+
+  <main id="usagePage">
+
+    <section class="titleArea">
+
+      <small>ANALYTICS</small>
+
+      <h1>Usage</h1>
+
+      <p>
+        Overview of your API balances and activity.
+      </p>
+
+    </section>
+
+
+    <!-- TOTAL -->
+
+    <div class="totalBalance">
+
+      <span>TOTAL BALANCE</span>
+
+      <strong id="totalBalance">
+        USD 0.00
+      </strong>
+
+      <small>
+        Across all saved API keys
+      </small>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="statsGrid">
+
+      <div class="statCard">
+
+        <span>API KEYS</span>
+
+        <strong id="usageKeyCount">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="statCard">
+
+        <span>ACTIVE</span>
+
+        <strong id="activeKeyCount">
+          0
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- USAGE -->
+
+    <div class="usageHeader">
+
+      <h2>API Usage</h2>
+
+      <button id="refreshUsage">
+        ↻ Refresh
+      </button>
+
+    </div>
+
+
+    <div id="usageList"></div>
+
+  </main>
+
+
+  <!-- BOTTOM NAV -->
 
   <nav>
 
-    <button class="selected">
+    <button
+      id="keysNav"
+      class="selected">
 
       🔑
 
-      <span>
-        Keys
-      </span>
+      <span>Keys</span>
 
     </button>
 
 
-    <button>
+    <button id="usageNav">
 
       📊
 
-      <span>
-        Usage
-      </span>
+      <span>Usage</span>
 
     </button>
 
 
-    <button>
+    <button id="settingsNav">
 
       ⚙️
 
-      <span>
-        Settings
-      </span>
+      <span>Settings</span>
 
     </button>
 
   </nav>
 
-
 </div>
-
 
 
 <script src="script.js"></script>
