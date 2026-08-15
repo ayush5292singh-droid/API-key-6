@@ -1,83 +1,207 @@
 const PASSWORD = "7890";
 
-let keys = JSON.parse(localStorage.getItem("keyvault_keys") || "[]");
 
-document.addEventListener("DOMContentLoaded", function () {
+/* =========================
+   LOAD SAVED KEYS
+========================= */
 
-  document.getElementById("unlockButton").onclick = unlock;
-
-  document.getElementById("pinInput").onkeydown = function(e) {
-    if (e.key === "Enter") unlock();
-  };
-
-  document.getElementById("lockButton").onclick = lock;
-
-  document.getElementById("addButton").onclick = function() {
-    document.getElementById("addPanel").style.display = "block";
-  };
-
-  document.getElementById("closeAdd").onclick = function() {
-    document.getElementById("addPanel").style.display = "none";
-  };
-
-  document.getElementById("searchInput").oninput = renderKeys;
-
-  renderKeys();
-});
+let keys =
+  JSON.parse(
+    localStorage.getItem("keyvault_keys") || "[]"
+  );
 
 
-function unlock() {
 
-  const pin = document.getElementById("pinInput").value;
+/* =========================
+   START
+========================= */
 
-  if (pin === PASSWORD) {
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
 
-    document.getElementById("lockScreen").style.display = "none";
-    document.getElementById("app").style.display = "block";
+    document
+      .getElementById("unlockButton")
+      .onclick = unlock;
 
-    document.getElementById("error").textContent = "";
+
+    document
+      .getElementById("pinInput")
+      .onkeydown = function (e) {
+
+        if (e.key === "Enter") {
+
+          unlock();
+
+        }
+
+      };
+
+
+    document
+      .getElementById("lockButton")
+      .onclick = lock;
+
+
+    document
+      .getElementById("addButton")
+      .onclick = function () {
+
+        document
+          .getElementById("addPanel")
+          .style.display = "block";
+
+      };
+
+
+    document
+      .getElementById("closeAdd")
+      .onclick = function () {
+
+        document
+          .getElementById("addPanel")
+          .style.display = "none";
+
+      };
+
+
+    document
+      .getElementById("searchInput")
+      .oninput = renderKeys;
+
 
     renderKeys();
 
-  } else {
+  }
+);
 
-    document.getElementById("error").textContent =
+
+
+/* =========================
+   PASSWORD
+========================= */
+
+function unlock() {
+
+  const pin =
+    document
+      .getElementById("pinInput")
+      .value;
+
+
+  if (pin === PASSWORD) {
+
+    document
+      .getElementById("lockScreen")
+      .style.display = "none";
+
+
+    document
+      .getElementById("app")
+      .style.display = "block";
+
+
+    document
+      .getElementById("error")
+      .textContent = "";
+
+
+    renderKeys();
+
+  }
+
+  else {
+
+    document
+      .getElementById("error")
+      .textContent =
       "Incorrect password";
 
   }
+
 }
 
+
+
+/* =========================
+   LOCK
+========================= */
 
 function lock() {
 
-  document.getElementById("app").style.display = "none";
-  document.getElementById("lockScreen").style.display = "flex";
+  document
+    .getElementById("app")
+    .style.display = "none";
 
-  document.getElementById("pinInput").value = "";
+
+  document
+    .getElementById("lockScreen")
+    .style.display = "flex";
+
+
+  document
+    .getElementById("pinInput")
+    .value = "";
+
 }
 
 
-/* SAVE API KEY */
+
+/* =========================
+   SAVE API
+========================= */
 
 function saveKey() {
 
+
   const provider =
-    document.getElementById("providerInput").value.trim();
+    document
+      .getElementById("providerInput")
+      .value
+      .trim();
+
 
   const name =
-    document.getElementById("nameInput").value.trim();
+    document
+      .getElementById("nameInput")
+      .value
+      .trim();
+
 
   const api =
-    document.getElementById("apiInput").value.trim();
+    document
+      .getElementById("apiInput")
+      .value
+      .trim();
 
 
-  if (provider === "" || name === "" || api === "") {
+  const balance =
+    document
+      .getElementById("balanceInput")
+      .value
+      .trim();
 
-    alert("Please fill all three fields.");
+
+
+  /* CHECK */
+
+  if (
+    provider === "" ||
+    name === "" ||
+    api === ""
+  ) {
+
+    alert(
+      "Please fill Provider, API name and API key."
+    );
 
     return;
+
   }
 
+
+
+  /* CREATE */
 
   const newKey = {
 
@@ -87,13 +211,24 @@ function saveKey() {
 
     name: name,
 
-    key: api
+    key: api,
+
+    balance:
+      balance === ""
+        ? "0.00"
+        : Number(balance).toFixed(2)
 
   };
 
 
+
+  /* ADD */
+
   keys.push(newKey);
 
+
+
+  /* SAVE */
 
   localStorage.setItem(
     "keyvault_keys",
@@ -101,47 +236,99 @@ function saveKey() {
   );
 
 
-  document.getElementById("providerInput").value = "";
 
-  document.getElementById("nameInput").value = "";
+  /* CLEAR */
 
-  document.getElementById("apiInput").value = "";
+  document
+    .getElementById("providerInput")
+    .value = "";
 
 
-  document.getElementById("addPanel").style.display = "none";
+  document
+    .getElementById("nameInput")
+    .value = "";
 
+
+  document
+    .getElementById("apiInput")
+    .value = "";
+
+
+  document
+    .getElementById("balanceInput")
+    .value = "";
+
+
+
+  /* CLOSE */
+
+  document
+    .getElementById("addPanel")
+    .style.display = "none";
+
+
+
+  /* DISPLAY */
 
   renderKeys();
 
 }
 
 
-/* SHOW KEYS */
+
+/* =========================
+   DISPLAY KEYS
+========================= */
 
 function renderKeys() {
 
+
   const list =
-    document.getElementById("keyList");
+    document
+      .getElementById("keyList");
+
 
   const search =
-    document.getElementById("searchInput")
-    .value
-    .toLowerCase();
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase();
 
 
-  const filtered = keys.filter(function(key) {
 
-    return (
-      key.name.toLowerCase().includes(search) ||
-      key.provider.toLowerCase().includes(search)
+  const filtered =
+    keys.filter(
+      function (key) {
+
+        return (
+
+          key.name
+            .toLowerCase()
+            .includes(search)
+
+          ||
+
+          key.provider
+            .toLowerCase()
+            .includes(search)
+
+        );
+
+      }
     );
 
-  });
 
 
-  document.getElementById("allCount").textContent =
+  /* COUNT */
+
+  document
+    .getElementById("allCount")
+    .textContent =
     keys.length;
 
+
+
+  /* EMPTY */
 
   if (filtered.length === 0) {
 
@@ -149,9 +336,13 @@ function renderKeys() {
 
       <div class="empty">
 
-        <div class="bigKey">🔑</div>
+        <div class="bigKey">
+          🔑
+        </div>
 
-        <h2>No API keys yet</h2>
+        <h2>
+          No API keys yet
+        </h2>
 
         <p>
           Add your first API key using the ＋ button.
@@ -162,71 +353,102 @@ function renderKeys() {
     `;
 
     return;
+
   }
 
+
+
+  /* CLEAR */
 
   list.innerHTML = "";
 
 
-  filtered.forEach(function(key) {
 
-    const card =
-      document.createElement("div");
+  /* CARDS */
 
-    card.className = "apiCard";
+  filtered.forEach(
+    function (key) {
 
 
-    card.innerHTML = `
+      const card =
+        document.createElement("div");
 
-      <div class="providerIcon">
-        ${getIcon(key.provider)}
-      </div>
 
-      <div class="apiInfo">
+      card.className =
+        "apiCard";
 
-        <h3>${escapeHTML(key.name)}</h3>
 
-        <div class="provider">
-          ${escapeHTML(key.provider)}
+
+      card.innerHTML = `
+
+        <div class="providerIcon">
+
+          ${getIcon(key.provider)}
+
         </div>
 
-        <div class="masked">
-          ${maskKey(key.key)}
+
+        <div class="apiInfo">
+
+          <h3>
+            ${escapeHTML(key.name)}
+          </h3>
+
+          <div class="provider">
+            ${escapeHTML(key.provider)}
+          </div>
+
+          <div class="masked">
+            ${maskKey(key.key)}
+          </div>
+
+          <div class="status">
+            ● Valid
+          </div>
+
         </div>
 
-        <div class="status">
-          ● Saved
+
+        <div class="cardRight">
+
+          <strong>
+            USD ${key.balance}
+          </strong>
+
+          <small>
+            Balance
+          </small>
+
+          <br>
+
+          <button
+            class="deleteButton"
+            onclick="deleteKey(${key.id})">
+
+            🗑️
+
+          </button>
+
         </div>
 
-      </div>
-
-      <div class="cardRight">
-
-        <strong>—</strong>
-
-        <small>Balance</small>
-
-        <button
-          class="deleteButton"
-          onclick="deleteKey(${key.id})">
-          🗑️
-        </button>
-
-      </div>
-
-    `;
+      `;
 
 
-    list.appendChild(card);
+      list.appendChild(card);
 
-  });
+    }
+  );
 
 }
 
 
-/* MASK API KEY */
+
+/* =========================
+   MASK KEY
+========================= */
 
 function maskKey(key) {
+
 
   if (key.length < 8) {
 
@@ -234,47 +456,105 @@ function maskKey(key) {
 
   }
 
+
   return (
-    key.substring(0, 3) +
-    "••••••••••" +
-    key.substring(key.length - 4)
+
+    key.substring(0, 3)
+
+    +
+
+    "••••••••••"
+
+    +
+
+    key.substring(
+      key.length - 4
+    )
+
   );
 
 }
 
 
-/* PROVIDER ICON */
+
+/* =========================
+   ICON
+========================= */
 
 function getIcon(provider) {
 
-  const p = provider.toLowerCase();
 
-  if (p.includes("openai")) return "AI";
+  const p =
+    provider.toLowerCase();
 
-  if (p.includes("gemini")) return "GM";
 
-  if (p.includes("google")) return "GM";
+  if (
+    p.includes("openai")
+  ) {
 
-  if (p.includes("anthropic")) return "AN";
+    return "AI";
 
-  if (p.includes("deepseek")) return "DS";
+  }
 
-  if (p.includes("openrouter")) return "OR";
+
+  if (
+    p.includes("gemini") ||
+    p.includes("google")
+  ) {
+
+    return "GM";
+
+  }
+
+
+  if (
+    p.includes("anthropic")
+  ) {
+
+    return "AN";
+
+  }
+
+
+  if (
+    p.includes("deepseek")
+  ) {
+
+    return "DS";
+
+  }
+
+
+  if (
+    p.includes("openrouter")
+  ) {
+
+    return "OR";
+
+  }
+
 
   return "🔑";
 
 }
 
 
-/* DELETE */
+
+/* =========================
+   DELETE
+========================= */
 
 function deleteKey(id) {
 
-  keys = keys.filter(function(key) {
 
-    return key.id !== id;
+  keys =
+    keys.filter(
+      function (key) {
 
-  });
+        return key.id !== id;
+
+      }
+    );
 
 
   localStorage.setItem(
@@ -288,14 +568,20 @@ function deleteKey(id) {
 }
 
 
-/* SECURITY */
+
+/* =========================
+   HTML SAFETY
+========================= */
 
 function escapeHTML(text) {
+
 
   const div =
     document.createElement("div");
 
+
   div.textContent = text;
+
 
   return div.innerHTML;
 
