@@ -1,63 +1,54 @@
 const PASSWORD = "7890";
 
-/* Load saved keys */
 let keys = JSON.parse(localStorage.getItem("keyvault_keys") || "[]");
 
+document.addEventListener("DOMContentLoaded", () => {
 
-document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("unlockButton").onclick = unlock;
 
-  document.getElementById("unlockButton")
-    .addEventListener("click", unlock);
+  document.getElementById("pinInput").onkeydown = (e) => {
+    if (e.key === "Enter") unlock();
+  };
 
-  document.getElementById("pinInput")
-    .addEventListener("keydown", function (e) {
-      if (e.key === "Enter") unlock();
-    });
+  document.getElementById("lockButton").onclick = lock;
 
-  document.getElementById("lockButton")
-    .addEventListener("click", lock);
+  document.getElementById("addButton").onclick = () => {
+    document.getElementById("addPanel").style.display = "block";
+  };
 
-  document.getElementById("addButton")
-    .addEventListener("click", openAdd);
+  document.getElementById("closeAdd").onclick = () => {
+    document.getElementById("addPanel").style.display = "none";
+  };
 
-  document.getElementById("closeAdd")
-    .addEventListener("click", closeAdd);
+  document.getElementById("saveButton").onclick = saveKey;
 
-  document.getElementById("saveButton")
-    .addEventListener("click", saveKey);
-
-  document.getElementById("searchInput")
-    .addEventListener("input", renderKeys);
+  document.getElementById("searchInput").oninput = renderKeys;
 
   renderKeys();
 });
 
 
-/* PASSWORD */
-
 function unlock() {
 
   const pin = document.getElementById("pinInput").value;
-  const error = document.getElementById("error");
 
   if (pin === PASSWORD) {
 
-    error.textContent = "";
-
     document.getElementById("lockScreen").style.display = "none";
     document.getElementById("app").style.display = "block";
+
+    document.getElementById("error").textContent = "";
 
     renderKeys();
 
   } else {
 
-    error.textContent = "Incorrect password";
+    document.getElementById("error").textContent =
+      "Incorrect password";
 
   }
 }
 
-
-/* LOCK */
 
 function lock() {
 
@@ -67,26 +58,6 @@ function lock() {
   document.getElementById("pinInput").value = "";
 }
 
-
-/* OPEN ADD PANEL */
-
-function openAdd() {
-
-  document.getElementById("addPanel").style.display = "block";
-
-}
-
-
-/* CLOSE ADD PANEL */
-
-function closeAdd() {
-
-  document.getElementById("addPanel").style.display = "none";
-
-}
-
-
-/* SAVE API KEY */
 
 function saveKey() {
 
@@ -102,31 +73,22 @@ function saveKey() {
 
   if (!provider || !name || !api) {
 
-    alert("Please fill all fields.");
+    alert("Please fill all three fields.");
     return;
 
   }
 
 
   const newKey = {
-
     id: Date.now(),
-
     provider: provider,
-
     name: name,
-
     key: api
-
   };
 
 
-  /* Add to list */
-
   keys.push(newKey);
 
-
-  /* SAVE PERMANENTLY */
 
   localStorage.setItem(
     "keyvault_keys",
@@ -134,45 +96,35 @@ function saveKey() {
   );
 
 
-  /* Clear form */
-
   document.getElementById("providerInput").value = "";
   document.getElementById("nameInput").value = "";
   document.getElementById("apiInput").value = "";
 
 
-  /* Close panel */
-
   document.getElementById("addPanel").style.display = "none";
 
 
-  /* Show card */
-
   renderKeys();
+
+
+  alert("API Key saved successfully!");
+
 
 }
 
-
-/* DISPLAY KEYS */
 
 function renderKeys() {
 
   const list = document.getElementById("keyList");
 
   const search =
-    document.getElementById("searchInput")
-      .value
-      .toLowerCase();
+    document.getElementById("searchInput").value.toLowerCase();
 
 
-  const filtered = keys.filter(function (key) {
-
-    return (
-      key.name.toLowerCase().includes(search) ||
-      key.provider.toLowerCase().includes(search)
-    );
-
-  });
+  const filtered = keys.filter(key =>
+    key.name.toLowerCase().includes(search) ||
+    key.provider.toLowerCase().includes(search)
+  );
 
 
   document.getElementById("allCount").textContent = keys.length;
@@ -181,30 +133,21 @@ function renderKeys() {
   if (filtered.length === 0) {
 
     list.innerHTML = `
-
       <div class="empty">
-
         <div class="bigKey">🔑</div>
-
         <h2>No API keys yet</h2>
-
-        <p>
-          Add your first API key using the ＋ button.
-        </p>
-
+        <p>Add your first API key using the ＋ button.</p>
       </div>
-
     `;
 
     return;
-
   }
 
 
   list.innerHTML = "";
 
 
-  filtered.forEach(function (key) {
+  filtered.forEach(key => {
 
     const card = document.createElement("div");
 
@@ -212,16 +155,13 @@ function renderKeys() {
 
 
     card.innerHTML = `
-
       <div class="providerIcon">
-        ${getProviderIcon(key.provider)}
+        ${getIcon(key.provider)}
       </div>
 
       <div class="apiInfo">
 
-        <h3>
-          ${escapeHTML(key.name)}
-        </h3>
+        <h3>${escapeHTML(key.name)}</h3>
 
         <div class="provider">
           ${escapeHTML(key.provider)}
@@ -243,14 +183,12 @@ function renderKeys() {
 
         <small>Balance</small>
 
-        <button
-          class="deleteButton"
-          data-id="${key.id}">
+        <button class="deleteButton"
+          onclick="deleteKey(${key.id})">
           🗑️
         </button>
 
       </div>
-
     `;
 
 
@@ -258,87 +196,48 @@ function renderKeys() {
 
   });
 
-
-  /* DELETE BUTTONS */
-
-  document.querySelectorAll(".deleteButton")
-    .forEach(function (button) {
-
-      button.addEventListener("click", function () {
-
-        deleteKey(Number(button.dataset.id));
-
-      });
-
-    });
-
 }
 
-
-/* MASK KEY */
-
-function maskKey(key) {
-
-  if (key.length <= 7) {
-    return "••••••••";
-  }
-
-  return (
-    key.substring(0, 3) +
-    "••••••••••" +
-    key.substring(key.length - 4)
-  );
-
-}
-
-
-/* PROVIDER ICON */
-
-function getProviderIcon(provider) {
-
-  const p = provider.toLowerCase();
-
-  if (p.includes("openai")) return "AI";
-
-  if (p.includes("gemini") || p.includes("google"))
-    return "GM";
-
-  if (p.includes("anthropic"))
-    return "AN";
-
-  if (p.includes("deepseek"))
-    return "DS";
-
-  if (p.includes("openrouter"))
-    return "OR";
-
-  return "🔑";
-}
-
-
-/* DELETE */
 
 function deleteKey(id) {
 
-  keys = keys.filter(function (key) {
-
-    return key.id !== id;
-
-  });
-
+  keys = keys.filter(key => key.id !== id);
 
   localStorage.setItem(
     "keyvault_keys",
     JSON.stringify(keys)
   );
 
-
   renderKeys();
-
 }
 
 
-/* HTML SAFETY */
+function maskKey(key) {
+
+  if (key.length < 8) {
+    return "••••••••";
+  }
+
+  return key.substring(0, 3) +
+    "••••••••••" +
+    key.substring(key.length - 4);
+}
+
+
+function getIcon(provider) {
+
+  const p = provider.toLowerCase();
+
+  if (p.includes("openai")) return "AI";
+  if (p.includes("gemini")) return "GM";
+  if (p.includes("google")) return "GM";
+  if (p.includes("anthropic")) return "AN";
+  if (p.includes("deepseek")) return "DS";
+  if (p.includes("openrouter")) return "OR";
+
+  return "🔑";
+}
+
 
 function escapeHTML(text) {
 
@@ -347,5 +246,4 @@ function escapeHTML(text) {
   div.textContent = text;
 
   return div.innerHTML;
-
 }
