@@ -5,46 +5,82 @@ let keys = [];
 
 document.addEventListener("DOMContentLoaded", function () {
 
+
+  /* UNLOCK */
+
   document
     .getElementById("unlockButton")
-    .addEventListener("click", unlockVault);
+    .addEventListener("click", unlock);
 
 
   document
     .getElementById("pinInput")
-    .addEventListener("keydown", function (event) {
+    .addEventListener("keydown", function(e) {
 
-      if (event.key === "Enter") {
-        unlockVault();
+      if (e.key === "Enter") {
+
+        unlock();
+
       }
 
     });
 
 
+  /* LOCK */
+
   document
     .getElementById("lockButton")
-    .addEventListener("click", lockVault);
+    .addEventListener("click", function() {
 
+      document
+        .getElementById("app")
+        .style.display = "none";
+
+      document
+        .getElementById("lockScreen")
+        .style.display = "flex";
+
+      document
+        .getElementById("pinInput")
+        .value = "";
+
+    });
+
+
+  /* ADD */
 
   document
     .getElementById("addButton")
-    .addEventListener("click", openAddPanel);
+    .addEventListener("click", function() {
 
+      document
+        .getElementById("addPanel")
+        .style.display = "block";
+
+    });
+
+
+  /* CLOSE */
 
   document
-    .getElementById("emptyAddButton")
-    .addEventListener("click", openAddPanel);
+    .getElementById("closeAdd")
+    .addEventListener("click", function() {
+
+      document
+        .getElementById("addPanel")
+        .style.display = "none";
+
+    });
 
 
-  document
-    .getElementById("closeAddButton")
-    .addEventListener("click", closeAddPanel);
-
+  /* SAVE */
 
   document
     .getElementById("saveButton")
     .addEventListener("click", saveKey);
 
+
+  /* SEARCH */
 
   document
     .getElementById("searchInput")
@@ -56,18 +92,20 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-/* UNLOCK */
+/* =========================
+   UNLOCK
+========================= */
 
-function unlockVault() {
+function unlock() {
 
   const pin =
-    document.getElementById("pinInput");
+    document.getElementById("pinInput").value;
 
   const error =
     document.getElementById("error");
 
 
-  if (pin.value === PASSWORD) {
+  if (pin === PASSWORD) {
 
     error.textContent = "";
 
@@ -84,75 +122,41 @@ function unlockVault() {
     error.textContent =
       "Incorrect password";
 
-    pin.value = "";
-
   }
 
 }
 
 
-/* LOCK */
-
-function lockVault() {
-
-  document
-    .getElementById("app")
-    .style.display = "none";
-
-  document
-    .getElementById("lockScreen")
-    .style.display = "flex";
-
-  document
-    .getElementById("pinInput")
-    .value = "";
-
-}
-
-
-/* OPEN ADD */
-
-function openAddPanel() {
-
-  document
-    .getElementById("addPanel")
-    .style.display = "block";
-
-  document
-    .getElementById("addPanel")
-    .scrollIntoView({
-      behavior: "smooth"
-    });
-
-}
-
-
-/* CLOSE ADD */
-
-function closeAddPanel() {
-
-  document
-    .getElementById("addPanel")
-    .style.display = "none";
-
-}
-
-
-/* SAVE */
+/* =========================
+   SAVE API
+========================= */
 
 function saveKey() {
 
   const provider =
-    document.getElementById("providerInput").value.trim();
+    document
+      .getElementById("providerInput")
+      .value
+      .trim();
 
   const name =
-    document.getElementById("nameInput").value.trim();
+    document
+      .getElementById("nameInput")
+      .value
+      .trim();
 
   const api =
-    document.getElementById("apiInput").value.trim();
+    document
+      .getElementById("apiInput")
+      .value
+      .trim();
 
 
-  if (!provider || !name || !api) {
+  if (
+    provider === "" ||
+    name === "" ||
+    api === ""
+  ) {
 
     alert("Please fill all fields.");
 
@@ -174,21 +178,32 @@ function saveKey() {
   });
 
 
-  document.getElementById("providerInput").value = "";
+  document
+    .getElementById("providerInput")
+    .value = "";
 
-  document.getElementById("nameInput").value = "";
+  document
+    .getElementById("nameInput")
+    .value = "";
 
-  document.getElementById("apiInput").value = "";
+  document
+    .getElementById("apiInput")
+    .value = "";
 
 
-  closeAddPanel();
+  document
+    .getElementById("addPanel")
+    .style.display = "none";
+
 
   renderKeys();
 
 }
 
 
-/* DISPLAY */
+/* =========================
+   RENDER
+========================= */
 
 function renderKeys() {
 
@@ -203,18 +218,27 @@ function renderKeys() {
 
 
   const filtered =
-    keys.filter(function (item) {
+    keys.filter(function(key) {
 
       return (
-        item.name.toLowerCase().includes(search) ||
-        item.provider.toLowerCase().includes(search)
+
+        key.name
+          .toLowerCase()
+          .includes(search)
+
+        ||
+
+        key.provider
+          .toLowerCase()
+          .includes(search)
+
       );
 
     });
 
 
   document
-    .querySelectorAll(".filter b")[0]
+    .getElementById("allCount")
     .textContent = keys.length;
 
 
@@ -222,9 +246,9 @@ function renderKeys() {
 
     list.innerHTML = `
 
-      <div class="empty-state">
+      <div class="empty">
 
-        <div class="key-symbol">🔑</div>
+        <div class="bigKey">🔑</div>
 
         <h2>No API keys yet</h2>
 
@@ -232,25 +256,9 @@ function renderKeys() {
           Add your first API key using the ＋ button.
         </p>
 
-        <button
-          id="emptyAddButton"
-          class="primary-button">
-
-          ＋ Add API Key
-
-        </button>
-
       </div>
 
     `;
-
-
-    document
-      .getElementById("emptyAddButton")
-      .addEventListener(
-        "click",
-        openAddPanel
-      );
 
     return;
 
@@ -260,51 +268,55 @@ function renderKeys() {
   list.innerHTML = "";
 
 
-  filtered.forEach(function (item) {
+  filtered.forEach(function(key) {
+
 
     const card =
-      document.createElement("article");
+      document.createElement("div");
 
 
-    card.className = "api-card";
+    card.className = "apiCard";
 
 
     card.innerHTML = `
 
-      <div class="provider-icon">
-        ${getIcon(item.provider)}
+      <div class="providerIcon">
+
+        ${getProviderIcon(key.provider)}
+
       </div>
 
-      <div class="api-info">
+
+      <div class="apiInfo">
 
         <h3>
-          ${escapeHTML(item.name)}
+          ${escapeHTML(key.name)}
         </h3>
 
-        <span class="provider">
-          ${escapeHTML(item.provider)}
-        </span>
+        <div class="provider">
+          ${escapeHTML(key.provider)}
+        </div>
 
-        <div class="masked-key">
-          ${maskKey(item.key)}
+        <div class="masked">
+          ${maskKey(key.key)}
         </div>
 
         <div class="status">
-          <i></i>
-          Not checked
+          ● Valid
         </div>
 
       </div>
 
-      <div class="api-right">
+
+      <div class="cardRight">
 
         <strong>—</strong>
 
         <small>Balance</small>
 
         <button
-          class="delete-button"
-          data-id="${item.id}">
+          class="deleteButton"
+          data-id="${key.id}">
           🗑️
         </button>
 
@@ -319,12 +331,12 @@ function renderKeys() {
 
 
   document
-    .querySelectorAll(".delete-button")
-    .forEach(function (button) {
+    .querySelectorAll(".deleteButton")
+    .forEach(function(button) {
 
       button.addEventListener(
         "click",
-        function () {
+        function() {
 
           deleteKey(
             Number(button.dataset.id)
@@ -338,59 +350,96 @@ function renderKeys() {
 }
 
 
-/* MASK */
+/* =========================
+   MASK API
+========================= */
 
 function maskKey(key) {
 
-  if (key.length <= 8) {
+  if (key.length <= 7) {
+
     return "••••••••";
+
   }
 
 
   return (
-    key.substring(0, 3) +
+
+    key.substring(0,3) +
+
     "••••••••••" +
+
     key.substring(key.length - 4)
+
   );
 
 }
 
 
-/* ICON */
+/* =========================
+   PROVIDER ICON
+========================= */
 
-function getIcon(provider) {
+function getProviderIcon(provider) {
 
-  const name =
+  const p =
     provider.toLowerCase();
 
 
-  if (name.includes("openai")) {
-    return "◎";
+  if (p.includes("openai")) {
+
+    return "AI";
+
   }
+
 
   if (
-    name.includes("google") ||
-    name.includes("gemini")
+    p.includes("gemini") ||
+    p.includes("google")
   ) {
-    return "✦";
+
+    return "GM";
+
   }
 
-  if (name.includes("anthropic")) {
-    return "A";
+
+  if (p.includes("anthropic")) {
+
+    return "AN";
+
   }
+
+
+  if (p.includes("deepseek")) {
+
+    return "DS";
+
+  }
+
+
+  if (p.includes("openrouter")) {
+
+    return "OR";
+
+  }
+
 
   return "🔑";
 
 }
 
 
-/* DELETE */
+/* =========================
+   DELETE
+========================= */
 
 function deleteKey(id) {
 
   keys =
-    keys.filter(function (item) {
-      return item.id !== id;
+    keys.filter(function(key) {
+
+      return key.id !== id;
+
     });
 
 
@@ -399,7 +448,9 @@ function deleteKey(id) {
 }
 
 
-/* ESCAPE */
+/* =========================
+   SECURITY
+========================= */
 
 function escapeHTML(text) {
 
