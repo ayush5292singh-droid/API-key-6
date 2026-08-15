@@ -300,6 +300,185 @@
 
   </main>
 
+</main>
+
+<!-- SETTINGS PAGE -->
+
+<main id="settingsPage">
+
+  <section class="titleArea">
+    <small>CONFIGURATION</small>
+    <h1>Settings</h1>
+    <p>Manage your KeyVault preferences.</p>
+  </section>
+
+  <div class="settingsSection">
+
+    <div class="sectionTitle">VAULT SECURITY</div>
+
+    <div class="settingCard">
+      <div class="settingIcon">🔐</div>
+
+      <div class="settingInfo">
+        <strong>Vault Lock</strong>
+        <small>Lock your vault immediately</small>
+      </div>
+
+      <button class="settingAction" id="settingsLock">
+        Lock
+      </button>
+    </div>
+
+    <div class="settingCard">
+      <div class="settingIcon">👁️</div>
+
+      <div class="settingInfo">
+        <strong>Hide API Keys</strong>
+        <small>Keep your keys hidden</small>
+      </div>
+
+      <label class="switch">
+        <input type="checkbox" id="hideKeys" checked>
+        <span></span>
+      </label>
+    </div>
+
+  </div>
+
+
+  <div class="settingsSection">
+
+    <div class="sectionTitle">CLIPBOARD</div>
+
+    <div class="settingCard">
+
+      <div class="settingIcon">📋</div>
+
+      <div class="settingInfo">
+        <strong>Auto-clear Clipboard</strong>
+        <small>Clear copied keys automatically</small>
+      </div>
+
+      <label class="switch">
+        <input type="checkbox" id="autoClipboard">
+        <span></span>
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <div class="settingsSection">
+
+    <div class="sectionTitle">BACKUP</div>
+
+    <div class="settingCard clickable" id="exportBackup">
+
+      <div class="settingIcon">⬆️</div>
+
+      <div class="settingInfo">
+        <strong>Export Backup</strong>
+        <small>Save your API key backup</small>
+      </div>
+
+      <span class="arrow">›</span>
+
+    </div>
+
+    <div class="settingCard clickable" id="importBackup">
+
+      <div class="settingIcon">⬇️</div>
+
+      <div class="settingInfo">
+        <strong>Import Backup</strong>
+        <small>Restore your saved keys</small>
+      </div>
+
+      <span class="arrow">›</span>
+
+    </div>
+
+    <input
+      type="file"
+      id="backupFile"
+      accept=".json"
+      hidden>
+
+  </div>
+
+
+  <div class="settingsSection">
+
+    <div class="sectionTitle">NOTIFICATIONS</div>
+
+    <div class="settingCard">
+
+      <div class="settingIcon">⚠️</div>
+
+      <div class="settingInfo">
+        <strong>Low Balance Alerts</strong>
+        <small>Show low balance warnings</small>
+      </div>
+
+      <label class="switch">
+        <input type="checkbox" id="lowBalance" checked>
+        <span></span>
+      </label>
+
+    </div>
+
+    <div class="settingCard">
+
+      <div class="settingIcon">❌</div>
+
+      <div class="settingInfo">
+        <strong>Invalid Key Alerts</strong>
+        <small>Show invalid key warnings</small>
+      </div>
+
+      <label class="switch">
+        <input type="checkbox" id="invalidAlerts" checked>
+        <span></span>
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <div class="settingsSection">
+
+    <div class="sectionTitle">APPEARANCE</div>
+
+    <div class="appearance">
+
+      <button class="appearanceButton active">
+        Dark
+      </button>
+
+      <button class="appearanceButton">
+        System
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="settingsSection">
+
+    <div class="sectionTitle">ABOUT</div>
+
+    <div class="aboutCard">
+      <strong>KeyVault</strong>
+      <span>API Key Manager</span>
+      <small>Version 1.0.0</small>
+    </div>
+
+  </div>
+
+</main>
 
   <!-- BOTTOM NAV -->
 
