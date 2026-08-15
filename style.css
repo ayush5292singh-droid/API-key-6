@@ -1,0 +1,533 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: #f4f7f5;
+
+  background:
+    radial-gradient(
+      circle at top,
+      #16352b 0%,
+      #08110e 45%,
+      #050807 100%
+    );
+}
+
+
+/* =========================
+   LOCK SCREEN
+========================= */
+
+#lockScreen {
+
+  min-height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+}
+
+
+.lock-card {
+
+  width: 100%;
+  max-width: 400px;
+
+  padding: 42px 30px;
+
+  text-align: center;
+
+  border-radius: 28px;
+
+  background:
+    rgba(15, 29, 24, 0.82);
+
+  border:
+    1px solid rgba(122, 255, 191, 0.12);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55);
+
+  backdrop-filter: blur(25px);
+}
+
+
+.lock-logo {
+
+  width: 72px;
+  height: 72px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #27b77b,
+      #126447
+    );
+
+  font-size: 34px;
+
+  box-shadow:
+    0 12px 35px rgba(30, 190, 125, 0.2);
+}
+
+
+.lock-card h1 {
+
+  margin: 0;
+
+  font-size: 34px;
+
+  letter-spacing: -1px;
+}
+
+
+.subtitle {
+
+  color: #8d9d96;
+
+  margin: 8px 0 25px;
+}
+
+
+.locked-badge {
+
+  display: inline-block;
+
+  padding: 8px 14px;
+
+  margin-bottom: 25px;
+
+  border-radius: 20px;
+
+  color: #82d9b0;
+
+  background:
+    rgba(48, 180, 120, 0.10);
+
+  font-size: 11px;
+
+  letter-spacing: 1px;
+}
+
+
+label {
+
+  display: block;
+
+  text-align: left;
+
+  margin-bottom: 8px;
+
+  color: #aab8b2;
+
+  font-size: 13px;
+}
+
+
+#pinInput {
+
+  width: 100%;
+
+  height: 58px;
+
+  border-radius: 15px;
+
+  border:
+    1px solid #263a33;
+
+  outline: none;
+
+  background: #09110e;
+
+  color: white;
+
+  text-align: center;
+
+  font-size: 24px;
+
+  letter-spacing: 10px;
+
+  padding: 10px;
+}
+
+
+#pinInput:focus {
+
+  border-color: #35c889;
+
+  box-shadow:
+    0 0 0 3px rgba(53, 200, 137, 0.10);
+}
+
+
+#error {
+
+  height: 18px;
+
+  margin: 8px 0;
+
+  color: #ff6875;
+
+  font-size: 13px;
+}
+
+
+#unlockButton {
+
+  width: 100%;
+
+  height: 56px;
+
+  border: 0;
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #29bd7d,
+      #15945f
+    );
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   MAIN APP
+========================= */
+
+#app {
+
+  display: none;
+
+  max-width: 1050px;
+
+  margin: auto;
+
+  padding: 25px 22px 120px;
+}
+
+
+header {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+
+.brand {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+
+.brand-icon {
+
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background:
+    #123a2b;
+
+  font-size: 22px;
+}
+
+
+.brand h2 {
+
+  margin: 0;
+
+  font-size: 20px;
+}
+
+
+.brand span {
+
+  color: #60736b;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+}
+
+
+.icon-button {
+
+  width: 44px;
+  height: 44px;
+
+  border: 1px solid #23352f;
+
+  border-radius: 13px;
+
+  background: #0d1713;
+
+  color: white;
+
+  cursor: pointer;
+}
+
+
+/* WELCOME */
+
+.welcome {
+
+  margin:
+    50px 0 30px;
+}
+
+
+.eyebrow {
+
+  color: #4fba8b;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+}
+
+
+.welcome h1 {
+
+  margin: 8px 0;
+
+  font-size: 36px;
+
+  letter-spacing: -1px;
+}
+
+
+.welcome p {
+
+  margin: 0;
+
+  color: #819089;
+}
+
+
+/* OVERVIEW */
+
+.overview {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 14px;
+}
+
+
+.overview-card {
+
+  padding: 20px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(255,255,255,0.035);
+
+  border:
+    1px solid rgba(255,255,255,0.06);
+}
+
+
+.overview-card span {
+
+  display: block;
+
+  color: #64756e;
+
+  font-size: 10px;
+
+  letter-spacing: 1.5px;
+}
+
+
+.overview-card strong {
+
+  display: block;
+
+  margin: 8px 0 3px;
+
+  font-size: 25px;
+}
+
+
+.overview-card small {
+
+  color: #687971;
+}
+
+
+/* EMPTY STATE */
+
+.empty-state {
+
+  margin-top: 25px;
+
+  padding: 55px 20px;
+
+  text-align: center;
+
+  border-radius: 22px;
+
+  background:
+    rgba(255,255,255,0.025);
+
+  border:
+    1px solid rgba(255,255,255,0.05);
+}
+
+
+.key-symbol {
+
+  font-size: 42px;
+
+  margin-bottom: 10px;
+}
+
+
+.empty-state h2 {
+
+  margin: 8px 0;
+}
+
+
+.empty-state p {
+
+  margin: 0;
+
+  color: #6e8078;
+}
+
+
+/* NAV */
+
+nav {
+
+  position: fixed;
+
+  left: 50%;
+
+  bottom: 15px;
+
+  transform:
+    translateX(-50%);
+
+  width:
+    min(500px, 92%);
+
+  display: flex;
+
+  justify-content: space-around;
+
+  padding: 9px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(9, 16, 13, 0.95);
+
+  border:
+    1px solid #20332c;
+
+  backdrop-filter: blur(20px);
+}
+
+
+nav button {
+
+  border: 0;
+
+  background: transparent;
+
+  color: #66766f;
+
+  padding: 9px 22px;
+
+  border-radius: 13px;
+
+  cursor: pointer;
+
+  font-size: 17px;
+}
+
+
+nav button span {
+
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 10px;
+}
+
+
+nav .nav-active {
+
+  color: #63d7a4;
+
+  background:
+    rgba(45, 190, 126, 0.10);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+  .overview {
+
+    grid-template-columns: 1fr;
+  }
+
+  .welcome h1 {
+
+    font-size: 30px;
+  }
+
+}
