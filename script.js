@@ -1,171 +1,114 @@
 const PASSWORD = "7890";
 
-let keys = [];
+/* Load saved keys */
+let keys = JSON.parse(localStorage.getItem("keyvault_keys") || "[]");
 
 
 document.addEventListener("DOMContentLoaded", function () {
 
-
-  /* UNLOCK */
-
-  document
-    .getElementById("unlockButton")
+  document.getElementById("unlockButton")
     .addEventListener("click", unlock);
 
-
-  document
-    .getElementById("pinInput")
-    .addEventListener("keydown", function(e) {
-
-      if (e.key === "Enter") {
-
-        unlock();
-
-      }
-
+  document.getElementById("pinInput")
+    .addEventListener("keydown", function (e) {
+      if (e.key === "Enter") unlock();
     });
 
+  document.getElementById("lockButton")
+    .addEventListener("click", lock);
 
-  /* LOCK */
+  document.getElementById("addButton")
+    .addEventListener("click", openAdd);
 
-  document
-    .getElementById("lockButton")
-    .addEventListener("click", function() {
+  document.getElementById("closeAdd")
+    .addEventListener("click", closeAdd);
 
-      document
-        .getElementById("app")
-        .style.display = "none";
-
-      document
-        .getElementById("lockScreen")
-        .style.display = "flex";
-
-      document
-        .getElementById("pinInput")
-        .value = "";
-
-    });
-
-
-  /* ADD */
-
-  document
-    .getElementById("addButton")
-    .addEventListener("click", function() {
-
-      document
-        .getElementById("addPanel")
-        .style.display = "block";
-
-    });
-
-
-  /* CLOSE */
-
-  document
-    .getElementById("closeAdd")
-    .addEventListener("click", function() {
-
-      document
-        .getElementById("addPanel")
-        .style.display = "none";
-
-    });
-
-
-  /* SAVE */
-
-  document
-    .getElementById("saveButton")
+  document.getElementById("saveButton")
     .addEventListener("click", saveKey);
 
-
-  /* SEARCH */
-
-  document
-    .getElementById("searchInput")
+  document.getElementById("searchInput")
     .addEventListener("input", renderKeys);
 
-
   renderKeys();
-
 });
 
 
-/* =========================
-   UNLOCK
-========================= */
+/* PASSWORD */
 
 function unlock() {
 
-  const pin =
-    document.getElementById("pinInput").value;
-
-  const error =
-    document.getElementById("error");
-
+  const pin = document.getElementById("pinInput").value;
+  const error = document.getElementById("error");
 
   if (pin === PASSWORD) {
 
     error.textContent = "";
 
-    document
-      .getElementById("lockScreen")
-      .style.display = "none";
+    document.getElementById("lockScreen").style.display = "none";
+    document.getElementById("app").style.display = "block";
 
-    document
-      .getElementById("app")
-      .style.display = "block";
+    renderKeys();
 
   } else {
 
-    error.textContent =
-      "Incorrect password";
+    error.textContent = "Incorrect password";
 
   }
+}
+
+
+/* LOCK */
+
+function lock() {
+
+  document.getElementById("app").style.display = "none";
+  document.getElementById("lockScreen").style.display = "flex";
+
+  document.getElementById("pinInput").value = "";
+}
+
+
+/* OPEN ADD PANEL */
+
+function openAdd() {
+
+  document.getElementById("addPanel").style.display = "block";
 
 }
 
 
-/* =========================
-   SAVE API
-========================= */
+/* CLOSE ADD PANEL */
+
+function closeAdd() {
+
+  document.getElementById("addPanel").style.display = "none";
+
+}
+
+
+/* SAVE API KEY */
 
 function saveKey() {
 
   const provider =
-    document
-      .getElementById("providerInput")
-      .value
-      .trim();
+    document.getElementById("providerInput").value.trim();
 
   const name =
-    document
-      .getElementById("nameInput")
-      .value
-      .trim();
+    document.getElementById("nameInput").value.trim();
 
   const api =
-    document
-      .getElementById("apiInput")
-      .value
-      .trim();
+    document.getElementById("apiInput").value.trim();
 
 
-  if (
-    provider === "" ||
-    name === "" ||
-    api === ""
-  ) {
+  if (!provider || !name || !api) {
 
     alert("Please fill all fields.");
-
     return;
 
   }
 
 
-  keys.push({
+  const newKey = {
 
     id: Date.now(),
 
@@ -175,71 +118,64 @@ function saveKey() {
 
     key: api
 
-  });
+  };
 
 
-  document
-    .getElementById("providerInput")
-    .value = "";
+  /* Add to list */
 
-  document
-    .getElementById("nameInput")
-    .value = "";
-
-  document
-    .getElementById("apiInput")
-    .value = "";
+  keys.push(newKey);
 
 
-  document
-    .getElementById("addPanel")
-    .style.display = "none";
+  /* SAVE PERMANENTLY */
 
+  localStorage.setItem(
+    "keyvault_keys",
+    JSON.stringify(keys)
+  );
+
+
+  /* Clear form */
+
+  document.getElementById("providerInput").value = "";
+  document.getElementById("nameInput").value = "";
+  document.getElementById("apiInput").value = "";
+
+
+  /* Close panel */
+
+  document.getElementById("addPanel").style.display = "none";
+
+
+  /* Show card */
 
   renderKeys();
 
 }
 
 
-/* =========================
-   RENDER
-========================= */
+/* DISPLAY KEYS */
 
 function renderKeys() {
 
-  const list =
-    document.getElementById("keyList");
+  const list = document.getElementById("keyList");
 
   const search =
-    document
-      .getElementById("searchInput")
+    document.getElementById("searchInput")
       .value
       .toLowerCase();
 
 
-  const filtered =
-    keys.filter(function(key) {
+  const filtered = keys.filter(function (key) {
 
-      return (
+    return (
+      key.name.toLowerCase().includes(search) ||
+      key.provider.toLowerCase().includes(search)
+    );
 
-        key.name
-          .toLowerCase()
-          .includes(search)
-
-        ||
-
-        key.provider
-          .toLowerCase()
-          .includes(search)
-
-      );
-
-    });
+  });
 
 
-  document
-    .getElementById("allCount")
-    .textContent = keys.length;
+  document.getElementById("allCount").textContent = keys.length;
 
 
   if (filtered.length === 0) {
@@ -268,12 +204,9 @@ function renderKeys() {
   list.innerHTML = "";
 
 
-  filtered.forEach(function(key) {
+  filtered.forEach(function (key) {
 
-
-    const card =
-      document.createElement("div");
-
+    const card = document.createElement("div");
 
     card.className = "apiCard";
 
@@ -281,11 +214,8 @@ function renderKeys() {
     card.innerHTML = `
 
       <div class="providerIcon">
-
         ${getProviderIcon(key.provider)}
-
       </div>
-
 
       <div class="apiInfo">
 
@@ -302,11 +232,10 @@ function renderKeys() {
         </div>
 
         <div class="status">
-          ● Valid
+          ● Saved
         </div>
 
       </div>
-
 
       <div class="cardRight">
 
@@ -330,117 +259,78 @@ function renderKeys() {
   });
 
 
-  document
-    .querySelectorAll(".deleteButton")
-    .forEach(function(button) {
+  /* DELETE BUTTONS */
 
-      button.addEventListener(
-        "click",
-        function() {
+  document.querySelectorAll(".deleteButton")
+    .forEach(function (button) {
 
-          deleteKey(
-            Number(button.dataset.id)
-          );
+      button.addEventListener("click", function () {
 
-        }
-      );
+        deleteKey(Number(button.dataset.id));
+
+      });
 
     });
 
 }
 
 
-/* =========================
-   MASK API
-========================= */
+/* MASK KEY */
 
 function maskKey(key) {
 
   if (key.length <= 7) {
-
     return "••••••••";
-
   }
 
-
   return (
-
-    key.substring(0,3) +
-
+    key.substring(0, 3) +
     "••••••••••" +
-
     key.substring(key.length - 4)
-
   );
 
 }
 
 
-/* =========================
-   PROVIDER ICON
-========================= */
+/* PROVIDER ICON */
 
 function getProviderIcon(provider) {
 
-  const p =
-    provider.toLowerCase();
+  const p = provider.toLowerCase();
 
+  if (p.includes("openai")) return "AI";
 
-  if (p.includes("openai")) {
-
-    return "AI";
-
-  }
-
-
-  if (
-    p.includes("gemini") ||
-    p.includes("google")
-  ) {
-
+  if (p.includes("gemini") || p.includes("google"))
     return "GM";
 
-  }
-
-
-  if (p.includes("anthropic")) {
-
+  if (p.includes("anthropic"))
     return "AN";
 
-  }
-
-
-  if (p.includes("deepseek")) {
-
+  if (p.includes("deepseek"))
     return "DS";
 
-  }
-
-
-  if (p.includes("openrouter")) {
-
+  if (p.includes("openrouter"))
     return "OR";
 
-  }
-
-
   return "🔑";
-
 }
 
 
-/* =========================
-   DELETE
-========================= */
+/* DELETE */
 
 function deleteKey(id) {
 
-  keys =
-    keys.filter(function(key) {
+  keys = keys.filter(function (key) {
 
-      return key.id !== id;
+    return key.id !== id;
 
-    });
+  });
+
+
+  localStorage.setItem(
+    "keyvault_keys",
+    JSON.stringify(keys)
+  );
 
 
   renderKeys();
@@ -448,14 +338,11 @@ function deleteKey(id) {
 }
 
 
-/* =========================
-   SECURITY
-========================= */
+/* HTML SAFETY */
 
 function escapeHTML(text) {
 
-  const div =
-    document.createElement("div");
+  const div = document.createElement("div");
 
   div.textContent = text;
 
