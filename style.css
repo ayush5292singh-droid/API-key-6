@@ -2,8 +2,11 @@
   box-sizing: border-box;
 }
 
+
 body {
+
   margin: 0;
+
   min-height: 100vh;
 
   font-family:
@@ -35,14 +38,17 @@ body {
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   padding: 20px;
 }
 
+
 .lockBox {
 
   width: 100%;
+
   max-width: 390px;
 
   padding: 40px 28px;
@@ -59,9 +65,11 @@ body {
     0 30px 80px rgba(0,0,0,.55);
 }
 
+
 .lockIcon {
 
   width: 70px;
+
   height: 70px;
 
   margin: auto;
@@ -69,6 +77,7 @@ body {
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   border-radius: 20px;
@@ -78,6 +87,7 @@ body {
   font-size: 32px;
 }
 
+
 .lockBox h1 {
 
   margin: 18px 0 5px;
@@ -85,12 +95,14 @@ body {
   font-size: 32px;
 }
 
+
 .lockBox p {
 
   margin-top: 0;
 
   color: #788b82;
 }
+
 
 .locked {
 
@@ -108,6 +120,7 @@ body {
 
   font-size: 11px;
 }
+
 
 #pinInput {
 
@@ -134,6 +147,7 @@ body {
   letter-spacing: 7px;
 }
 
+
 #error {
 
   height: 20px;
@@ -144,6 +158,7 @@ body {
 
   font-size: 12px;
 }
+
 
 #unlockButton {
 
@@ -165,22 +180,20 @@ body {
 }
 
 
+
 /* =========================
-   MAIN
+   MAIN APP
 ========================= */
 
 #app {
 
   display: none;
 
-  max-width: 1000px;
+  max-width: 1100px;
 
   margin: auto;
 
-  padding:
-    25px
-    25px
-    120px;
+  padding: 25px 25px 120px;
 }
 
 
@@ -195,6 +208,7 @@ header {
   justify-content: space-between;
 }
 
+
 .logoArea {
 
   display: flex;
@@ -204,14 +218,17 @@ header {
   gap: 12px;
 }
 
+
 .logo {
 
   width: 45px;
+
   height: 45px;
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   border-radius: 14px;
@@ -221,12 +238,14 @@ header {
   font-size: 22px;
 }
 
+
 .logoArea h2 {
 
   margin: 0;
 
   font-size: 19px;
 }
+
 
 .logoArea small {
 
@@ -237,9 +256,11 @@ header {
   letter-spacing: 2px;
 }
 
+
 .lockButton {
 
   width: 42px;
+
   height: 42px;
 
   border-radius: 12px;
@@ -252,16 +273,14 @@ header {
 }
 
 
+
 /* TITLE */
 
 .titleArea {
 
-  margin:
-
-    50px
-    0
-    25px;
+  margin: 50px 0 25px;
 }
+
 
 .titleArea small {
 
@@ -272,12 +291,14 @@ header {
   font-size: 10px;
 }
 
+
 .titleArea h1 {
 
   margin: 7px 0;
 
-  font-size: 36px;
+  font-size: 38px;
 }
+
 
 .titleArea p {
 
@@ -287,9 +308,8 @@ header {
 }
 
 
-/* =========================
-   SEARCH
-========================= */
+
+/* SEARCH */
 
 .searchBox {
 
@@ -308,12 +328,14 @@ header {
   border: 1px solid #1f382d;
 }
 
+
 .searchBox span {
 
   color: #71837b;
 
   font-size: 22px;
 }
+
 
 .searchBox input {
 
@@ -330,10 +352,12 @@ header {
   font-size: 14px;
 }
 
+
 .searchBox button {
 
-  width: 42px;
-  height: 42px;
+  width: 44px;
+
+  height: 44px;
 
   border: 0;
 
@@ -343,13 +367,12 @@ header {
 
   color: white;
 
-  font-size: 24px;
+  font-size: 25px;
 }
 
 
-/* =========================
-   FILTERS
-========================= */
+
+/* FILTERS */
 
 .filters {
 
@@ -362,10 +385,12 @@ header {
   padding: 14px 0;
 }
 
+
 .filters::-webkit-scrollbar {
 
   display: none;
 }
+
 
 .filter {
 
@@ -384,6 +409,7 @@ header {
   font-size: 11px;
 }
 
+
 .filter.active {
 
   background: #123a2b;
@@ -392,6 +418,7 @@ header {
 
   color: #6de0aa;
 }
+
 
 
 /* =========================
@@ -404,7 +431,7 @@ header {
 
   margin: 10px 0 20px;
 
-  padding: 22px;
+  padding: 28px;
 
   border-radius: 20px;
 
@@ -412,6 +439,7 @@ header {
 
   border: 1px solid #234035;
 }
+
 
 .panelTop {
 
@@ -424,6 +452,7 @@ header {
   margin-bottom: 18px;
 }
 
+
 .panelTop small {
 
   color: #4bc48c;
@@ -433,10 +462,12 @@ header {
   font-size: 9px;
 }
 
+
 .panelTop h2 {
 
   margin: 5px 0 0;
 }
+
 
 .panelTop button {
 
@@ -449,22 +480,24 @@ header {
   font-size: 18px;
 }
 
+
 #addPanel label {
 
   display: block;
 
-  margin: 13px 0 6px;
+  margin: 14px 0 6px;
 
   color: #9aa9a3;
 
   font-size: 12px;
 }
 
+
 #addPanel input {
 
   width: 100%;
 
-  height: 48px;
+  height: 50px;
 
   padding: 12px;
 
@@ -481,13 +514,14 @@ header {
   font-size: 14px;
 }
 
+
 .saveButton {
 
   width: 100%;
 
-  margin-top: 18px;
+  margin-top: 20px;
 
-  height: 48px;
+  height: 52px;
 
   border: 0;
 
@@ -498,7 +532,10 @@ header {
   color: white;
 
   font-weight: 700;
+
+  font-size: 14px;
 }
+
 
 
 /* =========================
@@ -507,7 +544,7 @@ header {
 
 .empty {
 
-  padding: 55px 20px;
+  padding: 65px 20px;
 
   margin-top: 10px;
 
@@ -520,17 +557,20 @@ header {
   background: rgba(10,20,15,.5);
 }
 
+
 .bigKey {
 
-  font-size: 45px;
+  font-size: 48px;
 
   margin-bottom: 10px;
 }
+
 
 .empty h2 {
 
   margin: 5px 0;
 }
+
 
 .empty p {
 
@@ -538,6 +578,7 @@ header {
 
   font-size: 13px;
 }
+
 
 
 /* =========================
@@ -550,41 +591,60 @@ header {
 
   align-items: center;
 
-  gap: 15px;
+  gap: 16px;
 
-  margin: 10px 0;
+  width: 100%;
 
-  padding: 18px;
+  margin: 12px 0;
 
-  border-radius: 19px;
+  padding: 18px 20px;
 
-  background: #0d1813;
+  border-radius: 18px;
 
-  border: 1px solid #1e352b;
+  background: #101b16;
+
+  border: 1px solid #1d3429;
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.15);
+
+  transition: .2s ease;
 }
+
+
+.apiCard:hover {
+
+  transform: translateY(-2px);
+
+  border-color: #2c654d;
+}
+
 
 .providerIcon {
 
-  width: 48px;
-  height: 48px;
+  width: 52px;
+
+  height: 52px;
 
   flex-shrink: 0;
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
-  border-radius: 14px;
+  border-radius: 15px;
 
-  background: #164a35;
+  background: #164b36;
 
-  color: #6ce0ab;
+  color: #6ee3ac;
 
-  font-weight: bold;
+  font-weight: 800;
 
-  font-size: 20px;
+  font-size: 17px;
 }
+
 
 .apiInfo {
 
@@ -593,30 +653,36 @@ header {
   min-width: 0;
 }
 
+
 .apiInfo h3 {
 
-  margin: 0;
+  margin: 0 0 4px;
+
+  color: #f1f7f3;
 
   font-size: 16px;
 }
 
+
 .provider {
 
-  color: #71837b;
+  color: #788b82;
 
   font-size: 11px;
 }
+
 
 .masked {
 
   margin-top: 7px;
 
-  color: #82938c;
+  color: #71847b;
 
   font-family: monospace;
 
   font-size: 11px;
 }
+
 
 .status {
 
@@ -624,48 +690,59 @@ header {
 
   margin-top: 7px;
 
-  padding: 4px 8px;
+  padding: 4px 9px;
 
   border-radius: 10px;
 
-  background: #123025;
+  background: #103426;
 
-  color: #5bcf96;
+  color: #57d29a;
 
   font-size: 9px;
+
+  font-weight: 600;
 }
+
 
 .cardRight {
 
-  text-align: right;
+  min-width: 100px;
 
-  min-width: 70px;
+  text-align: right;
 }
+
 
 .cardRight strong {
 
   display: block;
 
+  color: #f1c75b;
+
   font-size: 15px;
 }
 
+
 .cardRight small {
 
-  color: #64766e;
+  color: #697b73;
 
   font-size: 9px;
 }
 
+
 .deleteButton {
 
-  margin-top: 8px;
+  margin-top: 7px;
 
   border: 0;
 
   background: transparent;
 
-  color: #718079;
+  color: #687a72;
+
+  cursor: pointer;
 }
+
 
 
 /* =========================
@@ -699,6 +776,7 @@ nav {
   backdrop-filter: blur(15px);
 }
 
+
 nav button {
 
   border: 0;
@@ -712,6 +790,7 @@ nav button {
   border-radius: 13px;
 }
 
+
 nav button span {
 
   display: block;
@@ -721,12 +800,14 @@ nav button span {
   font-size: 10px;
 }
 
+
 nav .selected {
 
   background: #103325;
 
   color: #60d69f;
 }
+
 
 
 /* MOBILE */
@@ -736,6 +817,7 @@ nav .selected {
   #app {
 
     padding-left: 15px;
+
     padding-right: 15px;
   }
 
@@ -751,8 +833,14 @@ nav .selected {
 
   .providerIcon {
 
-    width: 42px;
-    height: 42px;
+    width: 44px;
+
+    height: 44px;
+  }
+
+  .cardRight {
+
+    min-width: 75px;
   }
 
 }
