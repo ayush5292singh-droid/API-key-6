@@ -531,3 +531,150 @@ nav .nav-active {
   }
 
 }
+/* =========================
+   KEYS PAGE
+========================= */
+
+.search-area {
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 7px 9px 7px 15px;
+
+  border-radius: 16px;
+
+  background: #0b1511;
+
+  border: 1px solid #20352d;
+}
+
+.search-area span {
+  color: #72857c;
+  font-size: 23px;
+}
+
+.search-area input {
+
+  flex: 1;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 14px;
+
+  letter-spacing: 0;
+
+  text-align: left;
+}
+
+.search-area button {
+
+  width: 42px;
+  height: 42px;
+
+  border: 0;
+
+  border-radius: 12px;
+
+  background: #29ad76;
+
+  color: white;
+
+  font-size: 23px;
+}
+
+
+.filters {
+
+  display: flex;
+
+  gap: 8px;
+
+  margin: 15px 0;
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+}
+
+.filters::-webkit-scrollbar {
+  display: none;
+}
+
+.filter {
+
+  white-space: nowrap;
+
+  border: 1px solid #21352d;
+
+  background: #0c1512;
+
+  color: #83938d;
+
+  padding: 9px 13px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+}
+
+.filter b {
+
+  margin-left: 4px;
+
+  color: #5d7068;
+}
+
+
+.filter.active {
+
+  color: #73d8ad;
+
+  border-color: #236046;
+
+  background:
+    rgba(42, 180, 120, .10);
+}
+
+
+/* EMPTY */
+
+.empty-state {
+
+  margin-top: 20px;
+
+  padding: 45px 20px;
+
+  text-align: center;
+
+  border-radius: 22px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  border:
+    1px solid rgba(255,255,255,.05);
+}
+
+.primary-button {
+
+  margin-top: 20px;
+
+  border: 0;
+
+  padding: 13px 20px;
+
+  border-radius: 13px;
+
+  background: #25a970;
+
+  color: white;
+
+  font-weight: 600;
+}
