@@ -12,170 +12,188 @@
 
 <body>
 
-  <!-- LOCK SCREEN -->
+<!-- LOCK SCREEN -->
 
-  <main id="lockScreen">
+<main id="lockScreen">
 
-    <div class="lock-card">
+  <div class="lock-card">
 
-      <div class="lock-logo">
+    <div class="lock-logo">🔐</div>
+
+    <h1>KeyVault</h1>
+
+    <p class="subtitle">
+      Secure API key manager
+    </p>
+
+    <div class="locked-badge">
+      🔒 VAULT LOCKED
+    </div>
+
+    <label>Enter password</label>
+
+    <input
+      id="pinInput"
+      type="password"
+      inputmode="numeric"
+      maxlength="4"
+      placeholder="••••"
+    >
+
+    <p id="error"></p>
+
+    <button id="unlockButton">
+      Unlock Vault
+    </button>
+
+  </div>
+
+</main>
+
+
+<!-- MAIN APP -->
+
+<main id="app">
+
+  <header>
+
+    <div class="brand">
+
+      <div class="brand-icon">
         🔐
       </div>
 
-      <h1>KeyVault</h1>
-
-      <p class="subtitle">
-        Secure API key manager
-      </p>
-
-      <div class="locked-badge">
-        🔒 VAULT LOCKED
+      <div>
+        <h2>KeyVault</h2>
+        <span>API KEY MANAGER</span>
       </div>
-
-      <label for="pinInput">
-        Enter password
-      </label>
-
-      <input
-        id="pinInput"
-        type="password"
-        inputmode="numeric"
-        maxlength="4"
-        placeholder="••••"
-        autocomplete="off"
-      >
-
-      <p id="error"></p>
-
-      <button id="unlockButton">
-        Unlock Vault
-      </button>
 
     </div>
 
-  </main>
+    <button
+      id="lockButton"
+      class="icon-button">
+      🔒
+    </button>
+
+  </header>
 
 
-  <!-- MAIN APP -->
+  <!-- TITLE -->
 
-  <main id="app">
+  <section class="welcome">
 
-    <header>
+    <span class="eyebrow">
+      SECURE VAULT
+    </span>
 
-      <div class="brand">
+    <h1>Your API keys</h1>
 
-        <div class="brand-icon">
-          🔐
-        </div>
+    <p>
+      Manage all your AI credentials in one place.
+    </p>
 
-        <div>
-          <h2>KeyVault</h2>
-          <span>API KEY MANAGER</span>
-        </div>
-
-      </div>
-
-      <button id="lockButton" class="icon-button">
-        🔒
-      </button>
-
-    </header>
+  </section>
 
 
-    <section class="welcome">
+  <!-- SEARCH -->
 
-      <span class="eyebrow">
-        SECURE VAULT
-      </span>
+  <div class="search-area">
 
-      <h1>
-        Your API keys
-      </h1>
+    <span>⌕</span>
 
-      <p>
-        Manage your developer credentials in one place.
-      </p>
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Search keys or providers..."
+    >
 
-    </section>
+    <button id="addButton">
+      ＋
+    </button>
 
-
-    <section class="overview">
-
-      <div class="overview-card">
-
-        <span>API KEYS</span>
-
-        <strong>0</strong>
-
-        <small>Stored keys</small>
-
-      </div>
+  </div>
 
 
-      <div class="overview-card">
+  <!-- FILTERS -->
 
-        <span>BALANCE</span>
+  <div class="filters">
 
-        <strong>$0.00</strong>
+    <button class="filter active">
+      All <b>0</b>
+    </button>
 
-        <small>Available</small>
+    <button class="filter">
+      Valid <b>0</b>
+    </button>
 
-      </div>
+    <button class="filter">
+      Needs Check <b>0</b>
+    </button>
+
+    <button class="filter">
+      Low Balance <b>0</b>
+    </button>
+
+    <button class="filter">
+      Invalid <b>0</b>
+    </button>
+
+  </div>
 
 
-      <div class="overview-card">
+  <!-- API CARDS -->
 
-        <span>USAGE</span>
+  <section id="keyList">
 
-        <strong>0%</strong>
-
-        <small>This month</small>
-
-      </div>
-
-    </section>
-
-
-    <section class="empty-state">
+    <div class="empty-state">
 
       <div class="key-symbol">
         🔑
       </div>
 
-      <h2>
-        Your vault is empty
-      </h2>
+      <h2>No API keys yet</h2>
 
       <p>
-        Your saved API keys will appear here.
+        Add your first API key using the ＋ button.
       </p>
 
-    </section>
-
-
-    <nav>
-
-      <button class="nav-active">
-        🔑
-        <span>Keys</span>
+      <button
+        id="emptyAddButton"
+        class="primary-button">
+        ＋ Add API Key
       </button>
 
-      <button>
-        📊
-        <span>Usage</span>
-      </button>
+    </div>
 
-      <button>
-        ⚙️
-        <span>Settings</span>
-      </button>
-
-    </nav>
-
-  </main>
+  </section>
 
 
-  <script src="script.js"></script>
+  <!-- BOTTOM NAV -->
+
+  <nav>
+
+    <button class="nav-active">
+      🔑
+      <span>Keys</span>
+    </button>
+
+    <button>
+      📊
+      <span>Usage</span>
+    </button>
+
+    <button>
+      ⚙️
+      <span>Settings</span>
+    </button>
+
+  </nav>
+
+</main>
+
+
+<script src="script.js"></script>
 
 </body>
 
