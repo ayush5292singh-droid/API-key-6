@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>KeyVault</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- LOCK SCREEN -->
+
+  <main id="lockScreen">
+
+    <div class="lock-card">
+
+      <div class="lock-logo">
+        🔐
+      </div>
+
+      <h1>KeyVault</h1>
+
+      <p class="subtitle">
+        Secure API key manager
+      </p>
+
+      <div class="locked-badge">
+        🔒 VAULT LOCKED
+      </div>
+
+      <label for="pinInput">
+        Enter password
+      </label>
+
+      <input
+        id="pinInput"
+        type="password"
+        inputmode="numeric"
+        maxlength="4"
+        placeholder="••••"
+        autocomplete="off"
+      >
+
+      <p id="error"></p>
+
+      <button id="unlockButton">
+        Unlock Vault
+      </button>
+
+    </div>
+
+  </main>
+
+
+  <!-- MAIN APP -->
+
+  <main id="app">
+
+    <header>
+
+      <div class="brand">
+
+        <div class="brand-icon">
+          🔐
+        </div>
+
+        <div>
+          <h2>KeyVault</h2>
+          <span>API KEY MANAGER</span>
+        </div>
+
+      </div>
+
+      <button id="lockButton" class="icon-button">
+        🔒
+      </button>
+
+    </header>
+
+
+    <section class="welcome">
+
+      <span class="eyebrow">
+        SECURE VAULT
+      </span>
+
+      <h1>
+        Your API keys
+      </h1>
+
+      <p>
+        Manage your developer credentials in one place.
+      </p>
+
+    </section>
+
+
+    <section class="overview">
+
+      <div class="overview-card">
+
+        <span>API KEYS</span>
+
+        <strong>0</strong>
+
+        <small>Stored keys</small>
+
+      </div>
+
+
+      <div class="overview-card">
+
+        <span>BALANCE</span>
+
+        <strong>$0.00</strong>
+
+        <small>Available</small>
+
+      </div>
+
+
+      <div class="overview-card">
+
+        <span>USAGE</span>
+
+        <strong>0%</strong>
+
+        <small>This month</small>
+
+      </div>
+
+    </section>
+
+
+    <section class="empty-state">
+
+      <div class="key-symbol">
+        🔑
+      </div>
+
+      <h2>
+        Your vault is empty
+      </h2>
+
+      <p>
+        Your saved API keys will appear here.
+      </p>
+
+    </section>
+
+
+    <nav>
+
+      <button class="nav-active">
+        🔑
+        <span>Keys</span>
+      </button>
+
+      <button>
+        📊
+        <span>Usage</span>
+      </button>
+
+      <button>
+        ⚙️
+        <span>Settings</span>
+      </button>
+
+    </nav>
+
+  </main>
+
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
