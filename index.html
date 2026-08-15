@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>KeyVault</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- LOCK SCREEN -->
+
+<!-- =========================
+     LOCK SCREEN
+========================= -->
 
 <div id="lockScreen">
 
@@ -21,7 +27,9 @@
 
     <p>Secure API Key Manager</p>
 
-    <div class="locked">🔒 VAULT LOCKED</div>
+    <div class="locked">
+      🔒 VAULT LOCKED
+    </div>
 
     <input
       id="pinInput"
@@ -42,41 +50,67 @@
 </div>
 
 
-<!-- MAIN APP -->
+
+<!-- =========================
+     MAIN APP
+========================= -->
 
 <div id="app">
+
+
+  <!-- HEADER -->
 
   <header>
 
     <div class="logoArea">
 
-      <div class="logo">🔑</div>
+      <div class="logo">
+        🔑
+      </div>
 
       <div>
+
         <h2>KeyVault</h2>
-        <small>API KEY MANAGER</small>
+
+        <small>
+          API KEY MANAGER
+        </small>
+
       </div>
 
     </div>
 
-    <button id="lockButton" class="lockButton">
+
+    <button
+      id="lockButton"
+      class="lockButton">
+
       🔒
+
     </button>
 
   </header>
 
 
+
+  <!-- TITLE -->
+
   <section class="titleArea">
 
-    <small>SECURE VAULT</small>
+    <small>
+      SECURE VAULT
+    </small>
 
-    <h1>Your API keys</h1>
+    <h1>
+      Your API keys
+    </h1>
 
     <p>
       Manage all your AI credentials in one place.
     </p>
 
   </section>
+
 
 
   <!-- SEARCH -->
@@ -91,9 +125,12 @@
       placeholder="Search keys, providers, notes"
     >
 
-    <button id="addButton">＋</button>
+    <button id="addButton">
+      ＋
+    </button>
 
   </div>
+
 
 
   <!-- FILTERS -->
@@ -105,81 +142,126 @@
     </button>
 
     <button class="filter">
-      Valid <b>0</b>
+      Valid 0
     </button>
 
     <button class="filter">
-      Needs Check <b>0</b>
+      Needs Check 0
     </button>
 
     <button class="filter">
-      Low Balance <b>0</b>
+      Low Balance 0
     </button>
 
     <button class="filter">
-      Invalid <b>0</b>
+      Invalid 0
     </button>
 
   </div>
 
 
-  <!-- ADD API PANEL -->
+
+  <!-- =========================
+       ADD API PANEL
+  ========================= -->
 
   <div id="addPanel">
 
     <div class="panelTop">
 
       <div>
-        <small>NEW CREDENTIAL</small>
-        <h2>Add API Key</h2>
+
+        <small>
+          NEW CREDENTIAL
+        </small>
+
+        <h2>
+          Add API Key
+        </h2>
+
       </div>
 
-      <button id="closeAdd">✕</button>
+
+      <button id="closeAdd">
+        ✕
+      </button>
 
     </div>
 
 
-    <label>Provider</label>
+    <label>
+      Provider
+    </label>
 
     <input
       id="providerInput"
+      type="text"
       placeholder="e.g. OpenAI"
     >
 
 
-    <label>API name</label>
+    <label>
+      API name
+    </label>
 
     <input
       id="nameInput"
+      type="text"
       placeholder="e.g. OpenAI Production"
     >
 
 
-    <label>API key</label>
+    <label>
+      API key
+    </label>
 
     <input
       id="apiInput"
       type="password"
-      placeholder="Enter test API key"
+      placeholder="Enter API key"
     >
 
 
-    <button type="button" class="saveButton" onclick="saveKey()">
-  💾 Save API Key
-</button>
+    <label>
+      USD Balance
+    </label>
+
+    <input
+      id="balanceInput"
+      type="number"
+      step="0.01"
+      placeholder="e.g. 18.42"
+    >
+
+
+    <button
+      type="button"
+      class="saveButton"
+      onclick="saveKey()">
+
+      💾 Save API Key
+
+    </button>
 
   </div>
 
 
-  <!-- KEYS -->
+
+  <!-- =========================
+       API KEY LIST
+  ========================= -->
 
   <div id="keyList">
 
     <div class="empty">
 
-      <div class="bigKey">🔑</div>
+      <div class="bigKey">
+        🔑
+      </div>
 
-      <h2>No API keys yet</h2>
+      <h2>
+        No API keys yet
+      </h2>
 
       <p>
         Add your first API key using the ＋ button.
@@ -190,31 +272,54 @@
   </div>
 
 
-  <!-- BOTTOM NAV -->
+
+  <!-- =========================
+       BOTTOM NAV
+  ========================= -->
 
   <nav>
 
     <button class="selected">
+
       🔑
-      <span>Keys</span>
+
+      <span>
+        Keys
+      </span>
+
     </button>
 
+
     <button>
+
       📊
-      <span>Usage</span>
+
+      <span>
+        Usage
+      </span>
+
     </button>
 
+
     <button>
+
       ⚙️
-      <span>Settings</span>
+
+      <span>
+        Settings
+      </span>
+
     </button>
 
   </nav>
 
+
 </div>
+
 
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
